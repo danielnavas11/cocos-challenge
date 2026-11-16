@@ -3,9 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import { DatabaseModule } from './database/database.module';
 import { HealthController } from './health/health.controller';
-import { PortfolioController } from './portfolio/portfolio.controller';
+import { PortfolioModule } from './portfolio/portfolio.module';
 import { OrdersController } from './orders/orders.controller';
-import { InstrumentsController } from './instruments/instruments.controller';
+import { InstrumentsModule } from './instruments/instruments.module';
 
 @Module({
   imports: [
@@ -14,13 +14,10 @@ import { InstrumentsController } from './instruments/instruments.controller';
       load: [configuration],
     }),
     DatabaseModule,
+    PortfolioModule,
+    InstrumentsModule,
   ],
-  controllers: [
-    HealthController,
-    PortfolioController,
-    OrdersController,
-    InstrumentsController,
-  ],
+  controllers: [HealthController, OrdersController],
   providers: [],
 })
 export class AppModule {}

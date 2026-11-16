@@ -17,7 +17,7 @@ export class Order {
 
   @Column({
     name: 'price',
-    ...columnDecimalDefault,
+    ...columnDecimalDefault(),
   })
   price?: number;
 

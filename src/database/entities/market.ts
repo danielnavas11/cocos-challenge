@@ -9,19 +9,19 @@ export class Market {
   @Column({ name: 'instrumentid', type: 'int', nullable: true })
   instrumentId?: number;
 
-  @Column({ name: 'high', ...columnDecimalDefault })
+  @Column({ name: 'high', ...columnDecimalDefault() })
   high?: number;
 
-  @Column({ name: 'low', ...columnDecimalDefault })
+  @Column({ name: 'low', ...columnDecimalDefault() })
   low?: number;
 
-  @Column({ name: 'open', ...columnDecimalDefault })
+  @Column({ name: 'open', ...columnDecimalDefault() })
   open?: number;
 
-  @Column({ name: 'close', ...columnDecimalDefault })
+  @Column({ name: 'close', ...columnDecimalDefault() })
   close?: number;
 
-  @Column({ name: 'previousclose', ...columnDecimalDefault })
+  @Column({ name: 'previousclose', ...columnDecimalDefault() })
   previousClose?: number;
 
   @Column({ name: 'date', type: 'date', nullable: true })
