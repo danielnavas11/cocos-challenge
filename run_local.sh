@@ -5,9 +5,9 @@ set -e
 . .env
 
 if [ "${USE_LOCAL_BD}" = "true" ]; then
-  echo "Running with local database"
+  echo "Running with docker and local database"
   docker compose --env-file .env up --build cocos-api-local
 else
-  echo "Running with neo database"
-  docker compose --env-file .env up --build cocos-api-local
+  echo "Running without docker and neo database"
+  npm run start:dev
 fi

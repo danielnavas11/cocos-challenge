@@ -23,6 +23,8 @@ import { Market } from './entities/market';
         entities: [User, Instrument, Order, Market],
         synchronize: false,
         migrationsRun: false,
+        idle_in_transaction_session_timeout: 10000,
+        statement_timeout: 30000,
         extra:
           configService.get('env') === 'production'
             ? {

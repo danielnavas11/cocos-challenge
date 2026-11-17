@@ -4,8 +4,8 @@ import configuration from './config/configuration';
 import { DatabaseModule } from './database/database.module';
 import { HealthController } from './health/health.controller';
 import { PortfolioModule } from './portfolio/portfolio.module';
-import { OrdersController } from './orders/orders.controller';
 import { InstrumentsModule } from './instruments/instruments.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -16,8 +16,9 @@ import { InstrumentsModule } from './instruments/instruments.module';
     DatabaseModule,
     PortfolioModule,
     InstrumentsModule,
+    OrdersModule,
   ],
-  controllers: [HealthController, OrdersController],
+  controllers: [HealthController],
   providers: [],
 })
 export class AppModule {}

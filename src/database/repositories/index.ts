@@ -8,6 +8,8 @@ export const USER_REPOSITORY = Symbol('USER_REPOSITORY');
 export interface IInstrumentRepository {
   findByIds(instrumentIds: number[]): Promise<Instrument[]>;
   searchByTickerOrName(query: string): Promise<Instrument[]>;
+  findById(instrumentId: number): Promise<Instrument | null>;
+  findCurrency(): Promise<Instrument | null>;
 }
 export interface IMarketRepository {
   findLatestByInstrumentIds(
@@ -17,7 +19,12 @@ export interface IMarketRepository {
 
 export interface IOrdersRepository {
   findFilledOrders(userId: number): Promise<Order[]>;
+  findActiveOrders(userId: number): Promise<Order[]>;
+  findByIdForUpdate(orderId: number): Promise<Order | null>;
+  save(order: Order): Promise<Order>;
 }
+
 export interface IUserRepository {
   existsById(userId: number): Promise<boolean>;
+  lockById(userId: number): Promise<boolean>;
 }

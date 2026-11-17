@@ -1,0 +1,3 @@
+export const CURRENCY_INSTRUMENT_TYPE = 'MONEDA';
+export const CURRENCY_TICKER = 'ARS';
+export const MAX_ORDER_SIZE = 2_147_483_647;

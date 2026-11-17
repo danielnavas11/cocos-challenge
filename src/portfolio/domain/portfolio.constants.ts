@@ -1,2 +1,0 @@
-export const FILLED_ORDER_STATUS = 'FILLED';
-export const CURRENCY_INSTRUMENT_TYPE = 'MONEDA';

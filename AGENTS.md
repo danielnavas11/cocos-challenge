@@ -68,7 +68,6 @@ El agente **debe** respetar los 5 principios SOLID en cada módulo, servicio y c
     - Utilizar el helper `columnDecimalDefault` (`src/database/helpers.ts`) para campos monetarios/precios.
     - Para operaciones aritméticas acumulativas en memoria, evitar errores de punto flotante de JavaScript (`0.1 + 0.2 !== 0.3`) usando decimal.js.
 - **Transaccionalidad:** Toda creación o cancelación de órdenes que afecte saldos o posiciones debe ejecutarse dentro de una transacción de base de datos (`DataSource.transaction` / `QueryRunner`) para evitar condiciones de carrera (race conditions).
-- **Entregable Opcional:** Mantener actualizada una colección de **REST Client (`.http`)**, **Postman** o **Insomnia** en `/docs` o `/collection` con ejemplos funcionales de todos los endpoints.
 
 ---
 

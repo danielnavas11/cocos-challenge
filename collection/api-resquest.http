@@ -1,0 +1,267 @@
+@baseUrl = http://localhost:3000
+
+## Portfolio ##
+
+### Usuario con movimientos
+GET {{baseUrl}}/portfolio/1
+
+### Usuario sin movimientos
+GET {{baseUrl}}/portfolio/2
+
+### Usuario inexistente
+GET {{baseUrl}}/portfolio/1212
+
+### Formato invalido de id de usuario
+GET {{baseUrl}}/portfolio/abc
+
+## Búsqueda de activos ##
+
+### Validacion del parametro query
+GET {{baseUrl}}/instruments
+
+### Buscar por ticker
+GET {{baseUrl}}/instruments?query=PAMP
+
+### Buscar por nombre
+GET {{baseUrl}}/instruments?query=molinos
+
+### Con caracteres especiales
+GET {{baseUrl}}/instruments?query=compañía
+
+### Resultado vacio
+GET {{baseUrl}}/instruments?query=1212
+
+## Órdenes ##
+
+## Usuario 1
+### Depósito OK (FILLED)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "type": "MARKET",
+  "side": "CASH_IN",
+  "size": 100
+}
+
+### Retiro OK (FILLED)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "type": "MARKET",
+  "side": "CASH_OUT",
+  "size": 6000
+}
+
+### Usuario 1
+### Retiro OK (REJECTED)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "type": "MARKET",
+  "side": "CASH_OUT",
+  "size": 9000000
+}
+
+### MARKET x cantidad (FILLED)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 50,
+  "side": "BUY",
+  "type": "MARKET",
+  "size": 10
+}
+
+### MARKET x amount (FILLED)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 50,
+  "side": "BUY",
+  "type": "MARKET",
+  "amount": 10000
+}
+
+### MARKET x cantidad (REJECTED)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 47,
+  "side": "BUY",
+  "type": "MARKET",
+  "size": 1000000
+}
+
+### MARKET x cantidad y size (ERROR)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 47,
+  "side": "BUY",
+  "type": "MARKET",
+  "size": 10,
+  "amount": 1000
+}
+
+### Venta MARKET (FILLED)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 50,
+  "side": "SELL",
+  "type": "MARKET",
+  "size": 2
+}
+
+### Venta MARKET (REJECTED)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 34,
+  "side": "SELL",
+  "type": "MARKET",
+  "size": 1
+}
+
+### Usuario no existe
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1212,
+  "instrumentId": 45,
+  "side": "BUY",
+  "type": "MARKET",
+  "size": 10
+}
+
+### Instrumento no existe
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 1212,
+  "side": "BUY",
+  "type": "MARKET",
+  "size": 10
+}
+
+### MARKET de pesos
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 66,
+  "side": "BUY",
+  "type": "MARKET",
+  "size": 100
+}
+
+### MARKET sin precio
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 3,
+  "side": "BUY",
+  "type": "MARKET",
+  "size": 1
+}
+
+### MARKET (REJECTED) x precio bajo
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 47,
+  "side": "BUY",
+  "type": "MARKET",
+  "amount": 500
+}
+
+### LIMIT (NEW)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 45,
+  "side": "BUY",
+  "type": "LIMIT",
+  "size": 5,
+  "price": 900
+}
+
+### LIMIT sin precio
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 45,
+  "side": "BUY",
+  "type": "LIMIT",
+  "size": 10
+}
+
+### LIMIT (NEW)
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 54,
+  "side": "SELL",
+  "type": "LIMIT",
+  "size": 1,
+  "price": 900
+}
+
+### Cancelaciónes ###
+
+### LIMIT (NEW) para cancelar
+POST {{baseUrl}}/orders
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "instrumentId": 45,
+  "side": "BUY",
+  "type": "LIMIT",
+  "size": 5,
+  "price": 900
+}
+
+### Orden LIMIT pendiente, usar el id anterior en la orden LIMIT
+DELETE {{baseUrl}}/orders/${ID_ANTERIOR}/cancel
+
+### Orden no se puede cancelar
+DELETE {{baseUrl}}/orders/1/cancel
+
+### Orden no existe
+DELETE {{baseUrl}}/orders/1212/cancel
+
+### Id inválido
+DELETE {{baseUrl}}/orders/qwerty/cancel

@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ILike, In, Repository } from 'typeorm';
 import { IInstrumentRepository } from './index';
+import { CURRENCY_INSTRUMENT_TYPE, CURRENCY_TICKER } from '../../constants';
 
 @Injectable()
 export class InstrumentRepository implements IInstrumentRepository {
@@ -18,6 +19,17 @@ export class InstrumentRepository implements IInstrumentRepository {
 
     return this.instrumentRepository.find({
       where: { id: In(instrumentIds) },
+    });
+  }
+
+  findById(instrumentId: number): Promise<Instrument | null> {
+    return this.instrumentRepository.findOneBy({ id: instrumentId });
+  }
+
+  findCurrency(): Promise<Instrument | null> {
+    return this.instrumentRepository.findOneBy({
+      ticker: CURRENCY_TICKER,
+      type: CURRENCY_INSTRUMENT_TYPE,
     });
   }
 

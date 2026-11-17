@@ -1,8 +1,8 @@
 import Decimal from 'decimal.js';
 import { Instrument } from '../../database/entities/instrument';
 import { Order } from '../../database/entities/order';
-import { CURRENCY_INSTRUMENT_TYPE } from './portfolio.constants';
 import { PositionBalance } from './position-balance';
+import { CURRENCY_INSTRUMENT_TYPE } from '../../constants';
 
 type CashFlow = (size: Decimal, price: Decimal) => Decimal;
 type PositionUpdate = (
